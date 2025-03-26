@@ -505,6 +505,8 @@ RUN printf "id ICON \"$PREFIX/src/w64devkit.ico\"" >w64devkit.rc \
  && cat /mingw-w64-v$MINGW_VERSION/mingw-w64-libraries/winpthreads/COPYING \
         >>$PREFIX/COPYING.MinGW-w64-runtime.txt \
  && echo $VERSION >$PREFIX/VERSION.txt \
- && 7z a -mx=9 -mtm=- $PREFIX.7z $PREFIX
+ && 7z a -mx=9 -mtm=- /home/$PREFIX.7z $PREFIX \
+ && cp /7z/7z.sfx /home/7z.sfx
+RUN rm -rf /*.* /x-* /7z /binutils /bootstrap /busybox* /depd /expat /gdb /gcc /gmp /gnupg /libassuan /libgcrypt /libgpg-error /libiconv /libksba /make /mingw-* /mpc /mprf /npth /pinentry $PREFIX /winpthreads
 ENV PREFIX=${PREFIX}
-CMD cat /7z/7z.sfx $PREFIX.7z
+CMD cat /home/7z.sfx /home/$PREFIX.7z
